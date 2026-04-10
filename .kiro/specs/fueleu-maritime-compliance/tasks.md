@@ -135,44 +135,44 @@
 ## Phase 2 — Outbound Adapters (PostgreSQL Repositories)
 
 ### 2.1 Database Client Setup
-- [ ] 2.1.1 Install `pg`, `@types/pg`, `knex` (or `node-postgres` with raw queries — choose one and document)
-- [ ] 2.1.2 Create `backend/src/adapters/db/client.ts` — exports configured pg Pool using env vars (DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD)
-- [ ] 2.1.3 Create `backend/src/adapters/db/migrations/` directory
+- [x] 2.1.1 Install `pg`, `@types/pg`, `knex` (or `node-postgres` with raw queries — choose one and document)
+- [x] 2.1.2 Create `backend/src/adapters/db/client.ts` — exports configured pg Pool using env vars (DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD)
+- [x] 2.1.3 Create `backend/src/adapters/db/migrations/` directory
 
 ### 2.2 Database Migrations
-- [ ] 2.2.1 Create migration `001_create_routes.sql` — creates routes table with all columns per Requirement 8.2
-- [ ] 2.2.2 Create migration `002_create_ship_compliance.sql` — creates ship_compliance table per Requirement 8.3
-- [ ] 2.2.3 Create migration `003_create_bank_entries.sql` — creates bank_entries table per Requirement 8.4
-- [ ] 2.2.4 Create migration `004_create_pools.sql` — creates pools table per Requirement 8.5
-- [ ] 2.2.5 Create migration `005_create_pool_members.sql` — creates pool_members table with FK to pools per Requirement 8.6
-- [ ] 2.2.6 Create `backend/src/adapters/db/migrate.ts` — script that runs all migrations in order
+- [x] 2.2.1 Create migration `001_create_routes.sql` — creates routes table with all columns per Requirement 8.2
+- [x] 2.2.2 Create migration `002_create_ship_compliance.sql` — creates ship_compliance table per Requirement 8.3
+- [x] 2.2.3 Create migration `003_create_bank_entries.sql` — creates bank_entries table per Requirement 8.4
+- [x] 2.2.4 Create migration `004_create_pools.sql` — creates pools table per Requirement 8.5
+- [x] 2.2.5 Create migration `005_create_pool_members.sql` — creates pool_members table with FK to pools per Requirement 8.6
+- [x] 2.2.6 Create `backend/src/adapters/db/migrate.ts` — script that runs all migrations in order
 
 ### 2.3 Seed Data
-- [ ] 2.3.1 Create `backend/src/adapters/db/seeds/routes.ts` — inserts R001–R005 with exact values, sets R001 is_baseline = true
-- [ ] 2.3.2 Create `backend/src/adapters/db/seed.ts` — script that runs all seeds (idempotent: skip if already seeded)
+- [x] 2.3.1 Create `backend/src/adapters/db/seeds/routes.ts` — inserts R001–R005 with exact values, sets R001 is_baseline = true
+- [x] 2.3.2 Create `backend/src/adapters/db/seed.ts` — script that runs all seeds (idempotent: skip if already seeded)
 
 ### 2.4 PostgreSQL Repository Adapters
-- [ ] 2.4.1 Create `backend/src/adapters/db/repositories/PgRouteRepository.ts` — implements `RouteRepository` port
+- [x] 2.4.1 Create `backend/src/adapters/db/repositories/PgRouteRepository.ts` — implements `RouteRepository` port
   - `findAll()` → SELECT all routes, map to Route entity
   - `findById(routeId)` → SELECT WHERE route_id = $1
   - `findBaseline()` → SELECT WHERE is_baseline = true LIMIT 1
   - `setBaseline(routeId)` → UPDATE all to false, then UPDATE target to true (in transaction)
   - `findAllNonBaseline()` → SELECT WHERE is_baseline = false
-- [ ] 2.4.2 Create `backend/src/adapters/db/repositories/PgShipComplianceRepository.ts` — implements `ShipComplianceRepository` port
+- [x] 2.4.2 Create `backend/src/adapters/db/repositories/PgShipComplianceRepository.ts` — implements `ShipComplianceRepository` port
   - `save(compliance)` → INSERT into ship_compliance
   - `findByShipAndYear(shipId, year)` → SELECT WHERE ship_id = $1 AND year = $2 ORDER BY id DESC LIMIT 1
-- [ ] 2.4.3 Create `backend/src/adapters/db/repositories/PgBankingRepository.ts` — implements `BankingRepository` port
+- [x] 2.4.3 Create `backend/src/adapters/db/repositories/PgBankingRepository.ts` — implements `BankingRepository` port
   - `save(entry)` → INSERT into bank_entries
   - `findByShipAndYear(shipId, year)` → SELECT WHERE ship_id = $1 AND year = $2
   - `getTotalBanked(shipId, year)` → SELECT SUM(amount_gco2eq) WHERE ship_id = $1 AND year = $2
-- [ ] 2.4.4 Create `backend/src/adapters/db/repositories/PgPoolRepository.ts` — implements `PoolRepository` port
+- [x] 2.4.4 Create `backend/src/adapters/db/repositories/PgPoolRepository.ts` — implements `PoolRepository` port
   - `save(pool)` → INSERT into pools, then INSERT all pool_members (in transaction)
   - `findById(poolId)` → SELECT pool + JOIN pool_members
 
 ### 2.5 Repository Integration Tests
-- [ ] 2.5.1 Create `backend/src/adapters/db/__tests__/migrations.test.ts` — verifies all five tables exist after migration
-- [ ] 2.5.2 Create `backend/src/adapters/db/__tests__/seeds.test.ts` — verifies five routes present, R001 is baseline
-- [ ] 2.5.3 Create `backend/src/adapters/db/__tests__/PgRouteRepository.test.ts` — integration tests against test DB
+- [x] 2.5.1 Create `backend/src/adapters/db/__tests__/migrations.test.ts` — verifies all five tables exist after migration
+- [x] 2.5.2 Create `backend/src/adapters/db/__tests__/seeds.test.ts` — verifies five routes present, R001 is baseline
+- [x] 2.5.3 Create `backend/src/adapters/db/__tests__/PgRouteRepository.test.ts` — integration tests against test DB
 - [ ] 2.5.4 Create `backend/src/adapters/db/__tests__/PgBankingRepository.test.ts` — verifies ledger sum never goes negative
 
 ---

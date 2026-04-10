@@ -5,13 +5,17 @@
   "scripts": {
     "build": "tsc",
     "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/server.ts",
-    "test": "jest --runInBand",
+    "test": "jest --runInBand --testPathPattern=core",
     "test:unit": "jest --runInBand --testPathPattern=core",
     "test:integration": "jest --runInBand --testPathPattern=adapters",
     "migrate": "ts-node -r tsconfig-paths/register src/adapters/db/migrate.ts",
     "seed": "ts-node -r tsconfig-paths/register src/adapters/db/seed.ts"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/pg": "^8.20.0",
+    "dotenv": "^17.4.1",
+    "pg": "^8.20.0"
+  },
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/node": "^20.14.0",
