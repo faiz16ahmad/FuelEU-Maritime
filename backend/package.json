@@ -1,0 +1,27 @@
+{
+  "name": "@fueleu/backend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/server.ts",
+    "test": "jest --runInBand",
+    "test:unit": "jest --runInBand --testPathPattern=core",
+    "test:integration": "jest --runInBand --testPathPattern=adapters",
+    "migrate": "ts-node -r tsconfig-paths/register src/adapters/db/migrate.ts",
+    "seed": "ts-node -r tsconfig-paths/register src/adapters/db/seed.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.0",
+    "@types/supertest": "^6.0.2",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.4",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.1.5",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.4.5"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "fueleu-maritime",
+  "private": true,
+  "workspaces": ["backend", "frontend"],
+  "scripts": {
+    "test": "npm run test --workspace=backend"
+  }
+}

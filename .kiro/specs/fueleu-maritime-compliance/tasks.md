@@ -3,45 +3,45 @@
 ## Phase 1 — Core / Domain Logic
 
 ### 1.1 Project Scaffolding & Monorepo Structure
-- [ ] 1.1.1 Initialise root workspace with `package.json` (workspaces: backend, frontend)
-- [ ] 1.1.2 Create `backend/` directory with `package.json`, `tsconfig.json` (strict mode, path aliases for `@core`, `@adapters`)
-- [ ] 1.1.3 Create `frontend/` directory with Vite + React + TypeScript template and TailwindCSS
-- [ ] 1.1.4 Add `.gitignore`, `.env.example` files at root and in `backend/`
-- [ ] 1.1.5 Install backend dev dependencies: TypeScript, ts-node, nodemon, Jest, ts-jest, Supertest, @types/*
+- [x] 1.1.1 Initialise root workspace with `package.json` (workspaces: backend, frontend)
+- [x] 1.1.2 Create `backend/` directory with `package.json`, `tsconfig.json` (strict mode, path aliases for `@core`, `@adapters`)
+- [x] 1.1.3 Create `frontend/` directory with Vite + React + TypeScript template and TailwindCSS
+- [x] 1.1.4 Add `.gitignore`, `.env.example` files at root and in `backend/`
+- [x] 1.1.5 Install backend dev dependencies: TypeScript, ts-node, nodemon, Jest, ts-jest, Supertest, @types/*
 
 ### 1.2 Domain Value Objects
-- [ ] 1.2.1 Create `backend/src/core/domain/value-objects/GhgIntensity.ts` — branded number type, validates > 0, throws `DomainError` on invalid
-- [ ] 1.2.2 Create `backend/src/core/domain/value-objects/FuelConsumption.ts` — branded number type, validates > 0, throws `DomainError` on invalid
-- [ ] 1.2.3 Create `backend/src/core/domain/value-objects/ComplianceBalance.ts` — branded number type, exposes `isSurplus()`, `isDeficit()`, `isCompliant()` helpers
-- [ ] 1.2.4 Create `backend/src/core/domain/value-objects/EnergyInScope.ts` — computed from FuelConsumption × LCV constant
+- [x] 1.2.1 Create `backend/src/core/domain/value-objects/GhgIntensity.ts` — branded number type, validates > 0, throws `DomainError` on invalid
+- [x] 1.2.2 Create `backend/src/core/domain/value-objects/FuelConsumption.ts` — branded number type, validates > 0, throws `DomainError` on invalid
+- [x] 1.2.3 Create `backend/src/core/domain/value-objects/ComplianceBalance.ts` — branded number type, exposes `isSurplus()`, `isDeficit()`, `isCompliant()` helpers
+- [x] 1.2.4 Create `backend/src/core/domain/value-objects/EnergyInScope.ts` — computed from FuelConsumption × LCV constant
 - [ ] 1.2.5 Create `backend/src/core/domain/errors/DomainError.ts` — typed base error class with `code` and `message` fields
-- [ ] 1.2.6 Create `backend/src/core/domain/errors/index.ts` — re-exports all domain error subtypes (InvalidInputError, InsufficientBalanceError, InvalidPoolError, ResourceNotFoundError)
+- [x] 1.2.6 Create `backend/src/core/domain/errors/index.ts` — re-exports all domain error subtypes (InvalidInputError, InsufficientBalanceError, InvalidPoolError, ResourceNotFoundError)
 
 ### 1.3 Domain Constants
-- [ ] 1.3.1 Create `backend/src/core/domain/constants.ts` — exports `TARGET_INTENSITY = 89.3368`, `LCV_MJ_PER_TONNE = 41000`
+- [x] 1.3.1 Create `backend/src/core/domain/constants.ts` — exports `TARGET_INTENSITY = 89.3368`, `LCV_MJ_PER_TONNE = 41000`
 
 ### 1.4 Domain Entities
-- [ ] 1.4.1 Create `backend/src/core/domain/entities/Route.ts` — fields: id, routeId, year, ghgIntensity, isBaseline, vesselType, fuelType, fuelConsumption, distance, totalEmissions
-- [ ] 1.4.2 Create `backend/src/core/domain/entities/ShipCompliance.ts` — fields: id, shipId, year, cbGco2eq
-- [ ] 1.4.3 Create `backend/src/core/domain/entities/BankEntry.ts` — fields: id, shipId, year, amountGco2eq
-- [ ] 1.4.4 Create `backend/src/core/domain/entities/Pool.ts` — fields: id, year, createdAt, members: PoolMember[]
-- [ ] 1.4.5 Create `backend/src/core/domain/entities/PoolMember.ts` — fields: poolId, shipId, cbBefore, cbAfter
+- [x] 1.4.1 Create `backend/src/core/domain/entities/Route.ts` — fields: id, routeId, year, ghgIntensity, isBaseline, vesselType, fuelType, fuelConsumption, distance, totalEmissions
+- [x] 1.4.2 Create `backend/src/core/domain/entities/ShipCompliance.ts` — fields: id, shipId, year, cbGco2eq
+- [x] 1.4.3 Create `backend/src/core/domain/entities/BankEntry.ts` — fields: id, shipId, year, amountGco2eq
+- [x] 1.4.4 Create `backend/src/core/domain/entities/Pool.ts` — fields: id, year, createdAt, members: PoolMember[]
+- [x] 1.4.5 Create `backend/src/core/domain/entities/PoolMember.ts` — fields: poolId, shipId, cbBefore, cbAfter
 
 ### 1.5 Port Interfaces (Outbound)
-- [ ] 1.5.1 Create `backend/src/core/ports/outbound/RouteRepository.ts` — interface: `findAll()`, `findById(routeId)`, `findBaseline()`, `setBaseline(routeId)`, `findAllNonBaseline()`
-- [ ] 1.5.2 Create `backend/src/core/ports/outbound/ShipComplianceRepository.ts` — interface: `save(compliance)`, `findByShipAndYear(shipId, year)`
-- [ ] 1.5.3 Create `backend/src/core/ports/outbound/BankingRepository.ts` — interface: `save(entry)`, `findByShipAndYear(shipId, year)`, `getTotalBanked(shipId, year)`
-- [ ] 1.5.4 Create `backend/src/core/ports/outbound/PoolRepository.ts` — interface: `save(pool)`, `findById(poolId)`
-- [ ] 1.5.5 Create `backend/src/core/ports/outbound/index.ts` — re-exports all repository interfaces
+- [x] 1.5.1 Create `backend/src/core/ports/outbound/RouteRepository.ts` — interface: `findAll()`, `findById(routeId)`, `findBaseline()`, `setBaseline(routeId)`, `findAllNonBaseline()`
+- [x] 1.5.2 Create `backend/src/core/ports/outbound/ShipComplianceRepository.ts` — interface: `save(compliance)`, `findByShipAndYear(shipId, year)`
+- [x] 1.5.3 Create `backend/src/core/ports/outbound/BankingRepository.ts` — interface: `save(entry)`, `findByShipAndYear(shipId, year)`, `getTotalBanked(shipId, year)`
+- [x] 1.5.4 Create `backend/src/core/ports/outbound/PoolRepository.ts` — interface: `save(pool)`, `findById(poolId)`
+- [x] 1.5.5 Create `backend/src/core/ports/outbound/index.ts` — re-exports all repository interfaces
 
 ### 1.6 Use-Case: ComputeCB
-- [ ] 1.6.1 Create `backend/src/core/use-cases/ComputeCB.ts`
+- [x] 1.6.1 Create `backend/src/core/use-cases/ComputeCB.ts`
   - Input: `{ shipId: string, year: number, ghgIntensity: number, fuelConsumption: number }`
   - Compute `energyInScope = fuelConsumption × 41000`
   - Compute `cb = (89.3368 − ghgIntensity) × energyInScope`
   - Persist snapshot via `ShipComplianceRepository.save()`
   - Return `{ cbBefore, applied, cbAfter }`
-- [ ] 1.6.2 Write unit tests for ComputeCB in `backend/src/core/use-cases/__tests__/ComputeCB.test.ts`
+- [x] 1.6.2 Write unit tests for ComputeCB in `backend/src/core/use-cases/__tests__/ComputeCB.test.ts`
   - Test: known inputs produce exact CB value
   - Test: ghgIntensity = TARGET_INTENSITY → CB = 0
   - Test: ghgIntensity > TARGET → negative CB (deficit)
@@ -49,47 +49,47 @@
   - Test: invalid ghgIntensity (≤ 0) → DomainError
 
 ### 1.7 Use-Case: ComputeComparison
-- [ ] 1.7.1 Create `backend/src/core/use-cases/ComputeComparison.ts`
+- [x] 1.7.1 Create `backend/src/core/use-cases/ComputeComparison.ts`
   - Fetch baseline via `RouteRepository.findBaseline()`
   - Fetch all non-baseline routes via `RouteRepository.findAllNonBaseline()`
   - For each comparison route compute: `percentDiff = ((compGhg / baseGhg) − 1) × 100`
   - Set `compliant = ghgIntensity <= 89.3368`
   - Return `{ baseline, comparisons: [{ route, percentDiff, compliant }] }`
   - Throw `ResourceNotFoundError` if no baseline exists
-- [ ] 1.7.2 Write unit tests for ComputeComparison in `backend/src/core/use-cases/__tests__/ComputeComparison.test.ts`
+- [x] 1.7.2 Write unit tests for ComputeComparison in `backend/src/core/use-cases/__tests__/ComputeComparison.test.ts`
   - Test: percentDiff formula with known values
   - Test: compliant = true when ghgIntensity ≤ 89.3368
   - Test: compliant = false when ghgIntensity > 89.3368
   - Test: throws when no baseline route exists
 
 ### 1.8 Use-Case: BankSurplus
-- [ ] 1.8.1 Create `backend/src/core/use-cases/BankSurplus.ts`
+- [x] 1.8.1 Create `backend/src/core/use-cases/BankSurplus.ts`
   - Input: `{ shipId, year, cb }`
   - Validate `cb > 0`, else throw `InsufficientBalanceError`
   - Create `BankEntry { shipId, year, amountGco2eq: cb }`
   - Persist via `BankingRepository.save()`
   - Return saved entry
-- [ ] 1.8.2 Write unit tests for BankSurplus in `backend/src/core/use-cases/__tests__/BankSurplus.test.ts`
+- [x] 1.8.2 Write unit tests for BankSurplus in `backend/src/core/use-cases/__tests__/BankSurplus.test.ts`
   - Test: positive CB creates a BankEntry with correct amount
   - Test: CB = 0 → DomainError (InsufficientBalanceError)
   - Test: negative CB → DomainError
 
 ### 1.9 Use-Case: ApplyBanked
-- [ ] 1.9.1 Create `backend/src/core/use-cases/ApplyBanked.ts`
+- [x] 1.9.1 Create `backend/src/core/use-cases/ApplyBanked.ts`
   - Input: `{ shipId, year, amount }`
   - Fetch total banked via `BankingRepository.getTotalBanked(shipId, year)`
   - Validate `totalBanked >= amount`, else throw `InsufficientBalanceError`
   - Create negative `BankEntry { shipId, year, amountGco2eq: -amount }`
   - Persist via `BankingRepository.save()`
   - Return updated balance
-- [ ] 1.9.2 Write unit tests for ApplyBanked in `backend/src/core/use-cases/__tests__/ApplyBanked.test.ts`
+- [x] 1.9.2 Write unit tests for ApplyBanked in `backend/src/core/use-cases/__tests__/ApplyBanked.test.ts`
   - Test: valid amount reduces ledger correctly
   - Test: amount = totalBanked → balance becomes 0 (boundary)
   - Test: amount > totalBanked → DomainError (InsufficientBalanceError)
   - Test: no prior bank entries → DomainError
 
 ### 1.10 Use-Case: CreatePool
-- [ ] 1.10.1 Create `backend/src/core/use-cases/CreatePool.ts`
+- [x] 1.10.1 Create `backend/src/core/use-cases/CreatePool.ts`
   - Input: `{ shipIds: string[], year: number }`
   - Validate `shipIds.length >= 2`, else throw `InvalidInputError`
   - Fetch adjusted CB for each ship via `ShipComplianceRepository` + `BankingRepository`
@@ -101,7 +101,7 @@
     4. Ensure no surplus ship exits with negative CB
   - Persist Pool and PoolMembers via `PoolRepository.save()`
   - Return `{ poolId, year, members: [{ shipId, cbBefore, cbAfter }] }`
-- [ ] 1.10.2 Write unit tests for CreatePool in `backend/src/core/use-cases/__tests__/CreatePool.test.ts`
+- [x] 1.10.2 Write unit tests for CreatePool in `backend/src/core/use-cases/__tests__/CreatePool.test.ts`
   - Test: two ships (one surplus, one deficit) → correct cb_after values
   - Test: three ships mixed → greedy allocation produces valid distribution
   - Test: total CB negative → InvalidPoolError
@@ -111,20 +111,20 @@
   - Test: surplus ship cannot exit with negative CB
 
 ### 1.11 Use-Case: GetBankingRecords
-- [ ] 1.11.1 Create `backend/src/core/use-cases/GetBankingRecords.ts`
+- [x] 1.11.1 Create `backend/src/core/use-cases/GetBankingRecords.ts`
   - Input: `{ shipId, year }`
   - Fetch all entries via `BankingRepository.findByShipAndYear()`
   - Return list of BankEntry records
 
 ### 1.12 Use-Case: SetBaseline
-- [ ] 1.12.1 Create `backend/src/core/use-cases/SetBaseline.ts`
+- [x] 1.12.1 Create `backend/src/core/use-cases/SetBaseline.ts`
   - Input: `{ routeId }`
   - Verify route exists via `RouteRepository.findById()`, else throw `ResourceNotFoundError`
   - Call `RouteRepository.setBaseline(routeId)`
   - Return updated route
 
 ### 1.13 Use-Case: GetAdjustedCB
-- [ ] 1.13.1 Create `backend/src/core/use-cases/GetAdjustedCB.ts`
+- [x] 1.13.1 Create `backend/src/core/use-cases/GetAdjustedCB.ts`
   - Input: `{ shipId, year }`
   - Fetch CB snapshot via `ShipComplianceRepository.findByShipAndYear()`
   - Fetch total applied via `BankingRepository.getTotalBanked(shipId, year)`
