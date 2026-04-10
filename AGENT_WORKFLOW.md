@@ -54,6 +54,21 @@
 - **Domain-Driven Design (DDD):** Enforced the use of Value Objects to validate physical constraints (e.g., fuel consumption cannot be negative) before passing data to the use-cases.
 - **Incremental Version Control:** Committed Phase 1 separately to prove the core domain was built and tested in complete isolation from the infrastructure layer.
 
+## Phase 2: Outbound Adapters (PostgreSQL & Repositories)
+
+### Prompts & Outputs
+**Objective:** Execute Phase 2 to build the PostgreSQL database infrastructure and connect it to the pure Phase 1 logic using the established Port interfaces.
+
+**Prompt Used:**
+> "All Phase 1 tests are passing. Execute Phase 2 of tasks.md. Important directives for this phase: Use `pg` and raw SQL queries (or `knex`, choose one and be consistent) for the repositories. Ensure the `PgRouteRepository` implements the exact interface defined in the `core/ports`. Provide the `.env.example` file with standard local PostgreSQL credentials."
+
+**Output:** KIRO successfully generated 5 SQL migration files, a seed script with the required R001-R005 data, and 4 PostgreSQL repository classes implementing the core interfaces. It also provided integration test suites.
+
+### Validation / Corrections
+- **Validation (Architecture Integrity):** Verified that the new `PgRouteRepository` correctly implements the `RouteRepository` interface defined in the `core/` folder. The dependency points *inward* (adapters depend on core), preserving the Hexagonal Architecture. 
+- **Validation (Data Precision):** Checked the `seeds.ts` file to ensure the mock dataset matches the exact values provided in the assignment brief (e.g., R001: Container, HFO, 2024, 91.05 ghgIntensity, isBaseline: true).
+- **Observations:** KIRO successfully utilized SQL transactions within the `PgPoolRepository.save()` method to ensure that if saving a `pool_member` fails, the `pool` creation is rolled back, guaranteeing database consistency for the ledger.
+
 ## Best Practices Followed
 
 - **Hexagonal Architecture**: All domain logic in `core/` with zero framework dependencies; adapters implement port interfaces

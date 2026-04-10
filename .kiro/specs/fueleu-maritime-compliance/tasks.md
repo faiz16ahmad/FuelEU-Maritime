@@ -180,56 +180,56 @@
 ## Phase 3 — Inbound Adapters (HTTP / Express Controllers)
 
 ### 3.1 Express App Setup
-- [ ] 3.1.1 Install `express`, `@types/express`, `cors`, `dotenv`
-- [ ] 3.1.2 Create `backend/src/adapters/http/app.ts` — creates Express app, registers middleware (JSON, CORS), mounts routers
-- [ ] 3.1.3 Create `backend/src/server.ts` — entry point, connects DB pool, starts HTTP server on PORT env var
-- [ ] 3.1.4 Create `backend/src/adapters/http/middleware/errorHandler.ts` — maps DomainError subtypes to HTTP status codes (InvalidInputError → 400, ResourceNotFoundError → 404, InsufficientBalanceError/InvalidPoolError → 422, generic → 500)
+- [x] 3.1.1 Install `express`, `@types/express`, `cors`, `dotenv`
+- [x] 3.1.2 Create `backend/src/adapters/http/app.ts` — creates Express app, registers middleware (JSON, CORS), mounts routers
+- [x] 3.1.3 Create `backend/src/server.ts` — entry point, connects DB pool, starts HTTP server on PORT env var
+- [x] 3.1.4 Create `backend/src/adapters/http/middleware/errorHandler.ts` — maps DomainError subtypes to HTTP status codes (InvalidInputError → 400, ResourceNotFoundError → 404, InsufficientBalanceError/InvalidPoolError → 422, generic → 500)
 
 ### 3.2 Routes Controller
-- [ ] 3.2.1 Create `backend/src/adapters/http/routes/routesRouter.ts`
+- [x] 3.2.1 Create `backend/src/adapters/http/routes/routesRouter.ts`
   - `GET /routes` → invoke `GetAllRoutes` (or direct repo call), return JSON array
   - `POST /routes/:routeId/baseline` → invoke `SetBaseline` use-case, return updated route or 404
-- [ ] 3.2.2 Create `backend/src/adapters/http/routes/comparisonRouter.ts`
+- [x] 3.2.2 Create `backend/src/adapters/http/routes/comparisonRouter.ts`
   - `GET /routes/comparison` → invoke `ComputeComparison` use-case, return `{ baseline, comparisons }`
 
 ### 3.3 Compliance Controller
-- [ ] 3.3.1 Create `backend/src/adapters/http/routes/complianceRouter.ts`
+- [x] 3.3.1 Create `backend/src/adapters/http/routes/complianceRouter.ts`
   - `GET /compliance/cb?shipId&year` → validate params, invoke `ComputeCB`, return `{ cbBefore, applied, cbAfter }`
   - `GET /compliance/adjusted-cb?shipId&year` → validate params, invoke `GetAdjustedCB`, return result
 
 ### 3.4 Banking Controller
-- [ ] 3.4.1 Create `backend/src/adapters/http/routes/bankingRouter.ts`
+- [x] 3.4.1 Create `backend/src/adapters/http/routes/bankingRouter.ts`
   - `GET /banking/records?shipId&year` → invoke `GetBankingRecords`, return array
   - `POST /banking/bank` → validate body `{ shipId, year, cb }`, invoke `BankSurplus`, return entry
   - `POST /banking/apply` → validate body `{ shipId, year, amount }`, invoke `ApplyBanked`, return updated balance
 
 ### 3.5 Pools Controller
-- [ ] 3.5.1 Create `backend/src/adapters/http/routes/poolsRouter.ts`
+- [x] 3.5.1 Create `backend/src/adapters/http/routes/poolsRouter.ts`
   - `POST /pools` → validate body `{ shipIds: string[], year: number }`, invoke `CreatePool`, return pool result
 
 ### 3.6 Dependency Injection / Composition Root
-- [ ] 3.6.1 Create `backend/src/composition/container.ts` — instantiates PgRepositories, injects into use-case constructors, exports use-case instances
-- [ ] 3.6.2 Update all routers to import use-case instances from container
+- [x] 3.6.1 Create `backend/src/composition/container.ts` — instantiates PgRepositories, injects into use-case constructors, exports use-case instances
+- [x] 3.6.2 Update all routers to import use-case instances from container
 
 ### 3.7 HTTP Integration Tests (Supertest)
-- [ ] 3.7.1 Create `backend/src/adapters/http/__tests__/routes.test.ts`
+- [x] 3.7.1 Create `backend/src/adapters/http/__tests__/routes.test.ts`
   - GET /routes → 200, returns array with 5 routes
   - POST /routes/:routeId/baseline → 200, sets baseline
   - POST /routes/nonexistent/baseline → 404
-- [ ] 3.7.2 Create `backend/src/adapters/http/__tests__/comparison.test.ts`
+- [x] 3.7.2 Create `backend/src/adapters/http/__tests__/comparison.test.ts`
   - GET /routes/comparison → 200, returns baseline + comparisons with percentDiff and compliant
   - GET /routes/comparison with no baseline → 400
-- [ ] 3.7.3 Create `backend/src/adapters/http/__tests__/compliance.test.ts`
+- [x] 3.7.3 Create `backend/src/adapters/http/__tests__/compliance.test.ts`
   - GET /compliance/cb?shipId=S1&year=2025 → 200, correct CB values
   - GET /compliance/cb (missing params) → 400
   - GET /compliance/adjusted-cb → 200
-- [ ] 3.7.4 Create `backend/src/adapters/http/__tests__/banking.test.ts`
+- [x] 3.7.4 Create `backend/src/adapters/http/__tests__/banking.test.ts`
   - POST /banking/bank (positive CB) → 201
   - POST /banking/bank (negative CB) → 422
   - POST /banking/apply (valid amount) → 200
   - POST /banking/apply (over-apply) → 422
   - GET /banking/records → 200, returns entries
-- [ ] 3.7.5 Create `backend/src/adapters/http/__tests__/pools.test.ts`
+- [x] 3.7.5 Create `backend/src/adapters/http/__tests__/pools.test.ts`
   - POST /pools (valid members) → 201, returns cb_before and cb_after
   - POST /pools (total CB negative) → 422
   - POST /pools (single member) → 400
