@@ -1,10 +1,12 @@
 import { seedRoutes } from './seeds/routes';
+import { seedShipCompliance } from './seeds/ship-compliance';
 
 async function runSeeds(): Promise<void> {
   try {
     console.log('🌱 Starting database seeding...');
     
     await seedRoutes();
+    await seedShipCompliance();
     
     console.log('✅ All seeds completed successfully');
   } catch (error) {
