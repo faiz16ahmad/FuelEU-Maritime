@@ -296,7 +296,7 @@
 ## Phase 5 — Documentation Files
 
 ### 5.1 AGENT_WORKFLOW.md
-- [ ] 5.1.1 Create `AGENT_WORKFLOW.md` at project root with the following sections:
+- [x] 5.1.1 Create `AGENT_WORKFLOW.md` at project root with the following sections:
   - **Agents Used**: List of AI agents/tools used during development
   - **Prompts & Outputs**: Example prompts given to agents with summarised outputs
   - **Validation/Corrections**: Cases where agent output required correction and how it was fixed
@@ -304,7 +304,7 @@
   - **Best Practices Followed**: Coding standards, architecture decisions, testing discipline applied
 
 ### 5.2 README.md
-- [ ] 5.2.1 Create `README.md` at project root with sections:
+- [x] 5.2.1 Create `README.md` at project root with sections:
   - **Overview**: What the platform does and which regulation it implements
   - **Architecture Summary**: Hexagonal architecture diagram (ASCII), layer descriptions
   - **Setup & Run Instructions**: Prerequisites, env var setup, `npm run migrate`, `npm run seed`, `npm run dev`
@@ -312,7 +312,7 @@
   - **Sample API Requests**: curl examples for all 9 endpoints
 
 ### 5.3 REFLECTION.md
-- [ ] 5.3.1 Create `REFLECTION.md` at project root with sections:
+- [x] 5.3.1 Create `REFLECTION.md` at project root with sections:
   - **What You Learned Using AI Agents**: Insights on AI-assisted development workflow
   - **Efficiency Gains vs Manual Coding**: Time saved, areas where AI excelled
   - **Improvements for Next Time**: What would be done differently in a future AI-assisted project
