@@ -28,7 +28,7 @@ routesRouter.post('/:routeId/baseline', async (req: Request, res: Response, next
       });
     }
 
-    const updatedRoute = await setBaseline.execute({ routeId });
+    const updatedRoute = await setBaseline.execute({ routeId: routeId as string });
     res.json(updatedRoute);
   } catch (error) {
     next(error);

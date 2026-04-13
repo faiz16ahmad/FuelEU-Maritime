@@ -239,43 +239,43 @@
 ## Phase 4 — React Frontend
 
 ### 4.1 Frontend Project Setup
-- [ ] 4.1.1 Configure TailwindCSS in `frontend/` (tailwind.config.js, postcss.config.js, import in index.css)
-- [ ] 4.1.2 Install frontend dependencies: `axios` (or `fetch` wrapper), `recharts` (for charts), `react-query` or `swr` for data fetching
-- [ ] 4.1.3 Create `frontend/src/infrastructure/api/apiClient.ts` — Axios instance with baseURL from `VITE_API_URL` env var
-- [ ] 4.1.4 Create `frontend/src/infrastructure/api/` adapters for each domain area (routesApi, complianceApi, bankingApi, poolsApi)
+- [x] 4.1.1 Configure TailwindCSS in `frontend/` (tailwind.config.js, postcss.config.js, import in index.css)
+- [x] 4.1.2 Install frontend dependencies: `axios` (or `fetch` wrapper), `recharts` (for charts), `react-query` or `swr` for data fetching
+- [x] 4.1.3 Create `frontend/src/infrastructure/api/apiClient.ts` — Axios instance with baseURL from `VITE_API_URL` env var
+- [x] 4.1.4 Create `frontend/src/infrastructure/api/` adapters for each domain area (routesApi, complianceApi, bankingApi, poolsApi)
 
 ### 4.2 Shared UI Components
-- [ ] 4.2.1 Create `frontend/src/components/ui/Badge.tsx` — renders ✓ (green) or ✗ (red) based on boolean prop
-- [ ] 4.2.2 Create `frontend/src/components/ui/KpiCard.tsx` — displays a label + numeric value card
-- [ ] 4.2.3 Create `frontend/src/components/ui/Table.tsx` — generic sortable table component
-- [ ] 4.2.4 Create `frontend/src/components/ui/Select.tsx` — dropdown filter component
-- [ ] 4.2.5 Create `frontend/src/components/ui/Button.tsx` — button with disabled state styling
-- [ ] 4.2.6 Create `frontend/src/components/layout/TabBar.tsx` — four-tab navigation (Routes, Compare, Banking, Pooling)
-- [ ] 4.2.7 Create `frontend/src/App.tsx` — renders TabBar and conditionally renders active tab panel
+- [x] 4.2.1 Create `frontend/src/components/ui/Badge.tsx` — renders ✓ (green) or ✗ (red) based on boolean prop
+- [x] 4.2.2 Create `frontend/src/components/ui/KpiCard.tsx` — displays a label + numeric value card
+- [x] 4.2.3 Create `frontend/src/components/ui/Table.tsx` — generic sortable table component
+- [x] 4.2.4 Create `frontend/src/components/ui/Select.tsx` — dropdown filter component
+- [x] 4.2.5 Create `frontend/src/components/ui/Button.tsx` — button with disabled state styling
+- [x] 4.2.6 Create `frontend/src/components/layout/TabBar.tsx` — four-tab navigation (Routes, Compare, Banking, Pooling)
+- [x] 4.2.7 Create `frontend/src/App.tsx` — renders TabBar and conditionally renders active tab panel
 
 ### 4.3 Routes Tab
-- [ ] 4.3.1 Create `frontend/src/features/routes/RoutesTab.tsx`
+- [x] 4.3.1 Create `frontend/src/features/routes/RoutesTab.tsx`
   - Fetches GET /routes on mount
   - Renders filter dropdowns for vesselType, fuelType, year
   - Renders Table with columns: routeId, vesselType, fuelType, year, ghgIntensity, fuelConsumption, distance, totalEmissions
   - Each row has "Set Baseline" button → calls POST /routes/:routeId/baseline → refetches
-- [ ] 4.3.2 Create `frontend/src/features/routes/useRoutes.ts` — custom hook encapsulating fetch + filter logic
+- [x] 4.3.2 Create `frontend/src/features/routes/useRoutes.ts` — custom hook encapsulating fetch + filter logic
 
 ### 4.4 Compare Tab
-- [ ] 4.4.1 Create `frontend/src/features/compare/CompareTab.tsx`
+- [x] 4.4.1 Create `frontend/src/features/compare/CompareTab.tsx`
   - Fetches GET /routes/comparison on mount
   - Renders Table with columns: routeId, ghgIntensity, percentDiff, compliant (Badge)
   - Renders BarChart (recharts) with ghgIntensity per route + ReferenceLine at 89.3368
-- [ ] 4.4.2 Create `frontend/src/features/compare/useComparison.ts` — custom hook for comparison data
+- [x] 4.4.2 Create `frontend/src/features/compare/useComparison.ts` — custom hook for comparison data
 
 ### 4.5 Banking Tab
-- [ ] 4.5.1 Create `frontend/src/features/banking/BankingTab.tsx`
+- [x] 4.5.1 Create `frontend/src/features/banking/BankingTab.tsx`
   - Input fields: shipId, year
   - "Fetch CB" button → GET /compliance/cb → displays KpiCard for cb_before, applied, cb_after
   - "Bank Surplus" button → POST /banking/bank → disabled when cb_before ≤ 0
   - "Apply Banked" button + amount input → POST /banking/apply → disabled when no banked balance
   - Displays bank records table from GET /banking/records
-- [ ] 4.5.2 Create `frontend/src/features/banking/useBanking.ts` — custom hook for banking state and actions
+- [x] 4.5.2 Create `frontend/src/features/banking/useBanking.ts` — custom hook for banking state and actions
 
 ### 4.6 Pooling Tab
 - [ ] 4.6.1 Create `frontend/src/features/pooling/PoolingTab.tsx`
@@ -285,11 +285,11 @@
   - Pool sum indicator: green if sum ≥ 0, red if sum < 0
   - "Create Pool" button → POST /pools → disabled when sum < 0
   - After creation: displays cb_after for each member
-- [ ] 4.6.2 Create `frontend/src/features/pooling/usePooling.ts` — custom hook for pooling state and greedy preview
+- [x] 4.6.2 Create `frontend/src/features/pooling/usePooling.ts` — custom hook for pooling state and greedy preview
 
 ### 4.7 Frontend Environment Configuration
-- [ ] 4.7.1 Create `frontend/.env.example` with `VITE_API_URL=http://localhost:3000`
-- [ ] 4.7.2 Create `frontend/vite.config.ts` with proxy config for `/api` → backend in development
+- [x] 4.7.1 Create `frontend/.env.example` with `VITE_API_URL=http://localhost:3000`
+- [x] 4.7.2 Create `frontend/vite.config.ts` with proxy config for `/api` → backend in development
 
 ---
 

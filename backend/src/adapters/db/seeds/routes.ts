@@ -1,7 +1,7 @@
 import { pool } from '../client';
 
 // Seed data from assignment brief - exact values from KPIs Dataset table
-const seedRoutes = [
+const routeData = [
   {
     routeId: 'R001',
     vesselType: 'Container',
@@ -76,7 +76,7 @@ export async function seedRoutes(): Promise<void> {
     }
     
     // Insert all routes
-    for (const route of seedRoutes) {
+    for (const route of routeData) {
       await client.query(
         `INSERT INTO routes (
           route_id, vessel_type, fuel_type, year, ghg_intensity,
@@ -97,7 +97,7 @@ export async function seedRoutes(): Promise<void> {
     }
     
     await client.query('COMMIT');
-    console.log(`✅ Successfully seeded ${seedRoutes.length} routes (R001 set as baseline)`);
+    console.log(`✅ Successfully seeded ${routeData.length} routes (R001 set as baseline)`);
     
   } catch (error) {
     await client.query('ROLLBACK');

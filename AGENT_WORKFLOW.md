@@ -69,6 +69,36 @@
 - **Validation (Data Precision):** Checked the `seeds.ts` file to ensure the mock dataset matches the exact values provided in the assignment brief (e.g., R001: Container, HFO, 2024, 91.05 ghgIntensity, isBaseline: true).
 - **Observations:** KIRO successfully utilized SQL transactions within the `PgPoolRepository.save()` method to ensure that if saving a `pool_member` fails, the `pool` creation is rolled back, guaranteeing database consistency for the ledger.
 
+## Phase 3: Inbound Adapters (HTTP Express API)
+
+### Prompts & Outputs
+**Objective:** Execute Phase 3 to build the REST API that will serve the React frontend, ensuring strict separation of concerns via Dependency Injection.
+
+**Prompt Used:**
+> "Phase 2 is complete and committed. Execute Phase 3 of tasks.md. Directives: Build the Express.js application and the Inbound HTTP Adapters (controllers). Use a strict Dependency Injection (DI) pattern or Composition Root to inject the PostgreSQL repositories into the core use-cases. The Express routes must NOT contain any business logic or math; they must strictly parse the request, call the injected use-cases, and return the HTTP response. Handle Domain Errors gracefully (e.g., return HTTP 422 for InsufficientBalanceError)."
+
+**Output:** KIRO generated the Express server setup, a DI container, an error-handling middleware, 5 modular routers, and Supertest integration tests validating the endpoints. 
+
+### Validation / Corrections
+- **Validation (Architecture Integrity):** Inspected the route controllers to verify they are completely devoid of domain math. They simply extract the `req.body`, pass it to the injected Use-Case (e.g., `BankSurplus`), and return the serialized JSON.
+- **Validation (Error Handling):** Verified that the error middleware successfully translates custom domain errors into appropriate HTTP semantic codes (e.g., mapping `InsufficientBalanceError` to HTTP 422 Unprocessable Entity), which perfectly sets up the frontend to display validation warnings.
+- **Observations:** KIRO effectively mapped the complex greedy algorithm from the Pooling use-case directly into a single, clean `POST /pools` endpoint without leaking any array-sorting logic into the HTTP layer.
+
+## Phase 4: Frontend React Dashboard (Vite + Tailwind)
+
+### Prompts & Outputs
+**Objective:** Execute Phase 4 to build the React frontend, strictly enforcing the visual domain rules (e.g., disabling buttons on negative balances).
+
+**Prompt Used:**
+> "Phase 3 is complete and fully tested. Execute Phase 4 of tasks.md. Directives: Scaffold the React frontend using Vite, React, TypeScript, and TailwindCSS. Build the 4 feature tabs: Routes, Compare, Banking, and Pooling. Use custom hooks for data fetching via Axios. Enforce domain rules visually: use Recharts for a bar chart with a target line at 89.3368, disable 'Bank Surplus' if CB <= 0, and turn Pool Sum red/disable 'Create Pool' if negative."
+
+**Output:** KIRO generated the React frontend, custom hooks (`useBanking`, `usePooling`), and the UI components.
+
+### Validation / Corrections
+- **Observation & Tooling Conflict:** During the initial build (`npm run build`), Vite threw a critical PostCSS error: `Cannot apply unknown utility class 'bg-gray-50'`. 
+- **Correction:** KIRO diagnosed that the project was using the newly released Tailwind CSS v4, which no longer supports legacy v3 configuration out of the box. KIRO autonomously corrected the CSS architecture to align with Tailwind v4's new `@reference` and theme variable requirements.
+- **Validation (Domain Rules):** Manually verified the UI constraints. The Recharts bar graph correctly renders the 89.3368 reference line. The "Bank Surplus" button correctly disables when a ship's deficit prevents banking, perfectly reflecting the backend ledger's mathematical rules.
+
 ## Best Practices Followed
 
 - **Hexagonal Architecture**: All domain logic in `core/` with zero framework dependencies; adapters implement port interfaces
